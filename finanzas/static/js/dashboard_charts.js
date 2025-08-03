@@ -14,8 +14,9 @@ function initGastosChart() {
                         datasets: [{
                             data: data.data,
                             backgroundColor: [
-                                '#FF6384', '#36A2EB', '#FFCE56',
-                                '#4BC0C0', '#9966FF', '#FF9F40'
+                                '#FBA73C', '#F7E4D9', '#F3713E',
+                                '#CB2D44', '#A02346', '#FCC856',
+                                '#E34345', '#E0B3BE', '#D67987'
                             ]
                         }]
                     },
@@ -88,7 +89,7 @@ function initInversionesChart() {
                             label: 'Capital Invertido Acumulado',
                             data: data.data,
                             fill: true,
-                            borderColor: '#CB2D44',
+                            borderColor: '#A02346',
                             backgroundColor: 'rgb(203, 45, 68)',
                             tension: 0.1
                         }]
