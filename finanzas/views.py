@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.contrib import messages
 from django.http import JsonResponse
 from django.contrib.auth import login
-from .tasks import process_drive_tickets
+from .tasks import process_drive_tickets, process_drive_investments
 from datetime import datetime, timedelta
 from django.db.models import Sum, Q
 from .utils import calculate_monthly_profit
@@ -503,3 +503,16 @@ def lista_deudas(request):
 @login_required
 def crear_deuda(request):
     return render(request, 'crear_deuda.html')
+
+@login_required
+def iniciar_procesamiento_inversiones(request):
+    """Inicia el procesamiento automático de inversiones."""
+    try:
+        task = process_drive_investments.delay(request.user.id)
+        return JsonResponse({"task_id": task.id}, status=202)
+    except Exception as e:
+        return JsonResponse({"error": f"No se pudo iniciar la tarea: {str(e)}"}, status=400)
+
+@login_required
+def vista_procesamiento_inversiones(request):
+    return render(request, 'procesamiento_inversiones.html')

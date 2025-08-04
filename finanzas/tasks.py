@@ -2,7 +2,7 @@ import logging
 from PIL import Image
 from celery import shared_task, group
 from django.contrib.auth.models import User
-from .services import GoogleDriveService, GeminiService, TransactionService
+from .services import GoogleDriveService, GeminiService, TransactionService, InvestmentService
 
 
 @shared_task(bind=True, max_retries=3, default_retry_delay=60)
@@ -73,4 +73,51 @@ def process_drive_tickets(user_id: int):
 
     except Exception as e:
         # Manejo de errores
+        return {'status': 'ERROR', 'message': str(e)}
+
+@shared_task(bind=True, max_retries=3, default_retry_delay=60)
+def process_single_inversion(self, user_id: int, file_id: str, file_name: str):
+    """Procesa una imagen de inversión y crea el registro correspondiente."""
+    try:
+        user = User.objects.get(id=user_id)
+        gdrive_service = GoogleDriveService(user)
+        gemini_service = GeminiService()
+        investment_service = InvestmentService()
+
+        file_content = gdrive_service.get_file_content(file_id)
+        image = Image.open(file_content)
+        extracted_data = gemini_service.extract_data_from_inversion(image)
+        investment_service.create_investment(user, extracted_data)
+
+        return {'status': 'SUCCESS', 'file_name': file_name}
+    except ConnectionError as e:
+        self.update_state(state='FAILURE', meta=str(e))
+        return {'status': 'FAILURE', 'file_name': file_name, 'error': 'ConnectionError'}
+    except Exception as e:
+        self.retry(exc=e)
+        return {'status': 'FAILURE', 'file_name': file_name, 'error': str(e)}
+
+@shared_task
+def process_drive_investments(user_id: int):
+    """Obtiene las imágenes de inversiones y lanza tareas paralelas para procesarlas."""
+    try:
+        user = User.objects.get(id=user_id)
+        gdrive_service = GoogleDriveService(user)
+        files_to_process = gdrive_service.list_files_in_folder(
+            folder_name="Inversiones",
+            mimetypes=['image/jpeg', 'image/png'],
+        )
+
+        if not files_to_process:
+            return {'status': 'NO_FILES', 'message': 'No se encontraron nuevas inversiones.'}
+
+        job = group(
+            process_single_inversion.s(user.id, item['id'], item['name'])
+            for item in files_to_process
+        )
+
+        result_group = job.apply_async()
+        result_group.save()
+        return {'status': 'STARTED', 'task_group_id': result_group.id, 'total_tasks': len(files_to_process)}
+    except Exception as e:
         return {'status': 'ERROR', 'message': str(e)}
