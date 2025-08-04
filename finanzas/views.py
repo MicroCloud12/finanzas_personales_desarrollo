@@ -2,13 +2,13 @@ import json
 import logging
 from decimal import Decimal
 from django.utils import timezone
-from django.db.models import Sum
 from django.urls import reverse
 from django.contrib import messages
 from django.http import JsonResponse
 from django.contrib.auth import login
 from .tasks import process_drive_tickets
 from datetime import datetime, timedelta
+from django.db.models import Sum, Q
 from .utils import calculate_monthly_profit
 from django.contrib.auth.models import User
 from django.utils.dateformat import DateFormat
