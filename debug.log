@@ -1,0 +1,1 @@
+ERROR 2025-08-04 11:21:31,076 views Error en get_initial_task_result: Object of type NotRegistered is not JSON serializable

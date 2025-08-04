@@ -17,7 +17,6 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 # Carga automáticamente las tareas desde todos los archivos 'tasks.py' de las apps registradas.
 app.autodiscover_tasks()
 
-
 # Programación de tareas periódicas
 app.conf.beat_schedule = {
     'update-profits-monthly': {

@@ -321,8 +321,10 @@ def lista_inversiones(request):
     """
     Muestra todas las inversiones del usuario logueado.
     """
+    suscripcion, created = Suscripcion.objects.get_or_create(usuario=request.user)
     lista = inversiones.objects.filter(propietario=request.user).order_by('-fecha_compra')
-    context = {'inversiones': lista}
+    es_usuario_premium = suscripcion.is_active()
+    context = {'inversiones': lista, 'es_usuario_premium': es_usuario_premium}
     return render(request, 'lista_inversiones.html', context)
 
 @login_required
