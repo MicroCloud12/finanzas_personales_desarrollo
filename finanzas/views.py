@@ -199,6 +199,10 @@ def lista_transacciones(request):
     context = {
         'transacciones': transacciones_del_mes,
         'es_usuario_premium': es_usuario_premium, # <-- Añadir la variable al contexto
+        'selected_year': year,
+        'selected_month': month,
+        'years': range(current_year, current_year - 5, -1),
+        'months': range(1, 13),
     }
     return render(request, 'lista_transacciones.html', context)
 
@@ -355,6 +359,26 @@ def crear_inversion(request):
     context = {'form': form}
     # Asegúrate de que el path a tu template es correcto
     return render(request, 'crear_inversion.html', context)
+
+@login_required
+def editar_inversion(request, inversion_id):
+    inversion = get_object_or_404(inversiones, id=inversion_id, propietario=request.user)
+    if request.method == 'POST':
+        form = InversionForm(request.POST, instance=inversion)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_inversiones')
+    else:
+        form = InversionForm(instance=inversion)
+    return render(request, 'editar_inversion.html', {'form': form})
+
+@login_required
+def eliminar_inversion(request, inversion_id):
+    inversion = get_object_or_404(inversiones, id=inversion_id, propietario=request.user)
+    if request.method == 'POST':
+        inversion.delete()
+        return redirect('lista_inversiones')
+    return render(request, 'confirmar_eliminar_inversion.html', {'inversion': inversion})
 
 @login_required
 def datos_inversiones(request):
