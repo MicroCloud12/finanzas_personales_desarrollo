@@ -113,6 +113,7 @@ def vista_dashboard(request):
         fecha__year=year, 
         fecha__month=month
     )
+
     # Hacemos UNA SOLA CONSULTA para obtener todos los totales
     agregados = transacciones.aggregate(
         # Suma de ingresos que no son ahorro y vienen de la quincena
@@ -162,7 +163,6 @@ def vista_dashboard(request):
         'es_usuario_premium': es_usuario_premium,
         'inversion_inicial': inversion_inicial_usd,
         'inversion_actual': inversion_actual,
-        # --- Pasamos los datos del nuevo gráfico ---
         'investment_chart_labels': json.dumps(chart_labels),
         'investment_chart_data': json.dumps(chart_data),
     }
@@ -472,6 +472,7 @@ def datos_ganancias_mensuales(request):
     data = [g.total for g in ganancias]
     return JsonResponse({'labels': labels, 'data': data})
 
+@login_required
 def lista_deudas(request):
     return render(request, 'deudas.html')
 
