@@ -1,9 +1,24 @@
 import logging
+import time
+from io import BytesIO
 from PIL import Image
 from celery import shared_task, group
 from django.contrib.auth.models import User
-from .services import GoogleDriveService, GeminiService, TransactionService, InvestmentService
+from .services import GoogleDriveService, GeminiService, TransactionService, InvestmentService, get_gemini_service
 
+logger = logging.getLogger(__name__)
+
+def load_and_optimize_image(file_content, max_width: int = 1024, quality: int = 80) -> Image.Image:
+    """Reduce el tamaño y comprime la imagen para agilizar la llamada a la IA."""
+    image = Image.open(file_content).convert("RGB")
+    if image.width > max_width:
+        ratio = max_width / float(image.width)
+        new_height = int(image.height * ratio)
+        image = image.resize((max_width, new_height))
+    buffer = BytesIO()
+    image.save(buffer, format="JPEG", quality=quality)
+    buffer.seek(0)
+    return Image.open(buffer)
 
 @shared_task(bind=True, max_retries=3, default_retry_delay=60)
 def process_single_ticket(self, user_id: int, file_id: str, file_name: str):
@@ -16,15 +31,23 @@ def process_single_ticket(self, user_id: int, file_id: str, file_name: str):
         
         # 1. Usar servicios
         gdrive_service = GoogleDriveService(user)
-        gemini_service = GeminiService()
+        #gemini_service = GeminiService()
+        gemini_service = get_gemini_service()
         transaction_service = TransactionService()
 
         # 2. Obtener contenido del archivo
+        start_download = time.perf_counter()
         file_content = gdrive_service.get_file_content(file_id)
-        image = Image.open(file_content)
+        #image = Image.open(file_content)
+        download_time = time.perf_counter() - start_download
+        logger.info("Download time for %s: %.2fs", file_name, download_time)
+        image = load_and_optimize_image(file_content)
 
         # 3. Extraer datos con Gemini
+        start_gemini = time.perf_counter()
         extracted_data = gemini_service.extract_data_from_image(image)
+        gemini_time = time.perf_counter() - start_gemini
+        logger.info("Gemini processing time for %s: %.2fs", file_name, gemini_time)
 
         # 4. Crear transacción pendiente
         transaction_service.create_pending_transaction(user, extracted_data)

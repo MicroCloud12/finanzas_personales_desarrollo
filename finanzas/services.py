@@ -172,6 +172,14 @@ class GeminiService:
                 "error": "Respuesta no válida de la IA",
                 "raw_response": cleaned_response
             }
+        
+_gemini_singleton = None
+def get_gemini_service() -> GeminiService:
+    """Obtiene una instancia única de :class:`GeminiService` por proceso."""
+    global _gemini_singleton
+    if _gemini_singleton is None:
+        _gemini_singleton = GeminiService()
+    return _gemini_singleton
 
 class TransactionService:
     """
