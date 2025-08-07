@@ -32,13 +32,22 @@ def home(request):
 def aprobar_todos_tickets(request):
     if request.method == 'POST':
         cuenta = request.POST.get('cuenta_origen')
+        print(f"Cuenta seleccionada: {cuenta}")
         categoria = request.POST.get('categoria')
+        print(f"Categoría seleccionada: {categoria}")
         tipo = request.POST.get('tipo', 'GASTO')
+        print(f"Tipo de transacción seleccionado: {tipo}")
 
-        if not (cuenta and categoria and tipo):
-            messages.error(request, "Seleccione cuenta, categoría y tipo antes de aprobar todos los tickets.")
+        if not (cuenta):
+            messages.error(request, "Seleccione cuenta antes de aprobar todos los tickets.")
             return redirect('revisar_tickets')
-
+        elif not (categoria):
+            messages.error(request, "Seleccione categoría antes de aprobar todos los tickets.")
+            return redirect('revisar_tickets')
+        elif not (tipo):
+            messages.error(request, "Seleccione tipo de transacción antes de aprobar todos los tickets.")
+            return redirect('revisar_tickets')
+        
         tickets = TransaccionPendiente.objects.filter(propietario=request.user, estado='pendiente')
         for ticket in tickets:
             TransactionService.approve_pending_transaction(
@@ -48,7 +57,7 @@ def aprobar_todos_tickets(request):
                 categoria=categoria,
                 tipo_transaccion=tipo
             )
-    return redirect('revisar_tickets')
+    return redirect('lista_transacciones')
 
 @login_required
 def rechazar_todos_tickets(request):
