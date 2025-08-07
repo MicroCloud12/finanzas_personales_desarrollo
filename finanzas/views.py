@@ -29,6 +29,34 @@ def home(request):
     return render(request, 'index.html')
 
 @login_required
+def aprobar_todos_tickets(request):
+    if request.method == 'POST':
+        cuenta = request.POST.get('cuenta_origen')
+        categoria = request.POST.get('categoria')
+        tipo = request.POST.get('tipo', 'GASTO')
+
+        if not (cuenta and categoria and tipo):
+            messages.error(request, "Seleccione cuenta, categoría y tipo antes de aprobar todos los tickets.")
+            return redirect('revisar_tickets')
+
+        tickets = TransaccionPendiente.objects.filter(propietario=request.user, estado='pendiente')
+        for ticket in tickets:
+            TransactionService.approve_pending_transaction(
+                ticket_id=ticket.id,
+                user=request.user,
+                cuenta=cuenta,
+                categoria=categoria,
+                tipo_transaccion=tipo
+            )
+    return redirect('revisar_tickets')
+
+@login_required
+def rechazar_todos_tickets(request):
+    if request.method == 'POST':
+        TransaccionPendiente.objects.filter(propietario=request.user, estado='pendiente').update(estado='rechazada')
+    return redirect('revisar_tickets')
+
+@login_required
 def iniciar_procesamiento_drive(request):
     """
     Inicia el proceso de descubrimiento y procesamiento paralelo de tickets.
