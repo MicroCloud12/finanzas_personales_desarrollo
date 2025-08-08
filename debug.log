@@ -89,3 +89,63 @@ INFO 2025-08-07 13:03:47,740 tasks Gemini processing time for Comprobante_27-jul
 INFO 2025-08-07 13:03:51,770 tasks Gemini processing time for Comprobante_27-jul-25-21_05_08.png: 9.95s
 INFO 2025-08-07 13:03:53,740 tasks Download time for 20250727_195431.jpg: 1.94s
 INFO 2025-08-07 13:03:57,538 tasks Gemini processing time for 20250727_195431.jpg: 3.67s
+INFO 2025-08-07 14:22:24,534 tasks Download time for recibo02-ago-2025 14:49:32.png: 3.60s
+INFO 2025-08-07 14:22:30,703 tasks Gemini processing time for recibo02-ago-2025 14:49:32.png: 6.14s
+INFO 2025-08-07 14:22:31,077 tasks Download time for 20250729_173523.jpg: 9.83s
+INFO 2025-08-07 14:22:36,033 tasks Gemini processing time for 20250729_173523.jpg: 4.82s
+INFO 2025-08-07 14:22:36,383 tasks Download time for 20250728_220155.jpg: 14.47s
+INFO 2025-08-07 14:22:36,912 tasks Download time for 20250728_221713.jpg: 15.35s
+INFO 2025-08-07 14:22:42,201 tasks Gemini processing time for 20250728_220155.jpg: 5.69s
+INFO 2025-08-07 14:22:46,887 tasks Gemini processing time for 20250728_221713.jpg: 9.83s
+INFO 2025-08-07 14:22:49,303 tasks Download time for Comprobante_29-jul-25-11_21_13.png: 2.36s
+INFO 2025-08-07 14:22:56,503 tasks Gemini processing time for Comprobante_29-jul-25-11_21_13.png: 7.14s
+INFO 2025-08-07 14:22:56,516 tasks Download time for Compartir comprobante: 9.32s
+INFO 2025-08-07 14:23:02,306 tasks Gemini processing time for Compartir comprobante: 5.72s
+INFO 2025-08-07 14:23:02,326 tasks Download time for Screenshot_20250728_122042_Mercado Pago.jpg: 14.92s
+INFO 2025-08-07 14:23:10,152 tasks Gemini processing time for Screenshot_20250728_122042_Mercado Pago.jpg: 7.79s
+INFO 2025-08-07 14:23:10,989 tasks Download time for 20250728_220856.jpg: 40.23s
+INFO 2025-08-07 14:23:16,146 tasks Gemini processing time for 20250728_220856.jpg: 5.03s
+INFO 2025-08-07 14:23:17,821 tasks Download time for Comprobante_28-jul-25-08_17_14.png: 7.38s
+INFO 2025-08-07 14:23:26,782 tasks Gemini processing time for Comprobante_28-jul-25-08_17_14.png: 8.92s
+INFO 2025-08-07 14:23:27,137 tasks Download time for Comprobante_28-jul-25-08_15_08.png: 16.42s
+INFO 2025-08-07 14:23:27,811 tasks Download time for Comprobante_27-jul-25-21_07_10.png: 10.91s
+INFO 2025-08-07 14:23:28,481 tasks Download time for Screenshot_20250728_083649_Santander.jpg: 18.28s
+INFO 2025-08-07 14:23:33,441 tasks Gemini processing time for Comprobante_28-jul-25-08_15_08.png: 6.25s
+INFO 2025-08-07 14:23:39,131 tasks Gemini processing time for Comprobante_27-jul-25-21_07_10.png: 11.27s
+INFO 2025-08-07 14:23:49,382 tasks Gemini processing time for Screenshot_20250728_083649_Santander.jpg: 20.86s
+INFO 2025-08-07 14:23:51,452 tasks Download time for Comprobante_27-jul-25-21_01_06.png: 2.04s
+INFO 2025-08-07 14:23:57,291 tasks Gemini processing time for Comprobante_27-jul-25-21_01_06.png: 5.80s
+INFO 2025-08-07 14:23:57,323 tasks Download time for Comprobante_27-jul-25-21_05_08.png: 30.51s
+INFO 2025-08-07 14:24:03,664 tasks Gemini processing time for Comprobante_27-jul-25-21_05_08.png: 6.30s
+INFO 2025-08-07 14:24:03,992 tasks Download time for 20250727_195431.jpg: 14.27s
+INFO 2025-08-07 14:24:08,921 tasks Gemini processing time for 20250727_195431.jpg: 4.73s
+INFO 2025-08-07 14:29:58,279 tasks Download time for 20250728_221713.jpg: 2.51s
+INFO 2025-08-07 14:30:03,160 tasks Gemini processing time for 20250728_221713.jpg: 4.70s
+INFO 2025-08-07 14:30:03,175 tasks Download time for recibo02-ago-2025 14:49:32.png: 7.83s
+INFO 2025-08-07 14:30:07,696 tasks Gemini processing time for recibo02-ago-2025 14:49:32.png: 4.50s
+INFO 2025-08-07 14:30:08,535 tasks Download time for 20250729_173523.jpg: 12.99s
+INFO 2025-08-07 14:30:12,489 tasks Gemini processing time for 20250729_173523.jpg: 3.83s
+INFO 2025-08-07 14:30:13,201 tasks Download time for 20250728_220155.jpg: 17.07s
+INFO 2025-08-07 14:30:17,790 tasks Gemini processing time for 20250728_220155.jpg: 4.46s
+INFO 2025-08-07 14:30:17,803 tasks Download time for Comprobante_29-jul-25-11_21_13.png: 9.80s
+INFO 2025-08-07 14:30:23,149 tasks Gemini processing time for Comprobante_29-jul-25-11_21_13.png: 5.31s
+INFO 2025-08-07 14:30:23,162 tasks Download time for Compartir comprobante: 10.64s
+INFO 2025-08-07 14:30:29,563 tasks Gemini processing time for Compartir comprobante: 6.31s
+INFO 2025-08-07 14:30:31,209 tasks Download time for 20250728_220856.jpg: 23.44s
+INFO 2025-08-07 14:30:37,141 tasks Gemini processing time for 20250728_220856.jpg: 5.78s
+INFO 2025-08-07 14:30:38,198 tasks Download time for Screenshot_20250728_083649_Santander.jpg: 8.40s
+INFO 2025-08-07 14:30:47,410 tasks Gemini processing time for Screenshot_20250728_083649_Santander.jpg: 9.17s
+INFO 2025-08-07 14:30:47,448 tasks Download time for Comprobante_28-jul-25-08_15_08.png: 10.27s
+INFO 2025-08-07 14:30:52,589 tasks Gemini processing time for Comprobante_28-jul-25-08_15_08.png: 5.07s
+INFO 2025-08-07 14:30:52,615 tasks Download time for Comprobante_28-jul-25-08_17_14.png: 22.49s
+INFO 2025-08-07 14:30:53,163 tasks Download time for Screenshot_20250728_122042_Mercado Pago.jpg: 23.56s
+INFO 2025-08-07 14:30:57,769 tasks Gemini processing time for Comprobante_28-jul-25-08_17_14.png: 5.12s
+INFO 2025-08-07 14:31:04,051 tasks Gemini processing time for Screenshot_20250728_122042_Mercado Pago.jpg: 10.85s
+INFO 2025-08-07 14:31:06,600 tasks Download time for Comprobante_27-jul-25-21_07_10.png: 2.52s
+INFO 2025-08-07 14:31:11,141 tasks Gemini processing time for Comprobante_27-jul-25-21_07_10.png: 4.47s
+INFO 2025-08-07 14:31:11,165 tasks Download time for Comprobante_27-jul-25-21_05_08.png: 6.79s
+INFO 2025-08-07 14:31:19,859 tasks Gemini processing time for Comprobante_27-jul-25-21_05_08.png: 8.66s
+INFO 2025-08-07 14:31:19,872 tasks Download time for Comprobante_27-jul-25-21_01_06.png: 15.25s
+INFO 2025-08-07 14:31:26,343 tasks Gemini processing time for Comprobante_27-jul-25-21_01_06.png: 6.44s
+INFO 2025-08-07 14:31:26,803 tasks Download time for 20250727_195431.jpg: 21.98s
+INFO 2025-08-07 14:31:30,619 tasks Gemini processing time for 20250727_195431.jpg: 3.59s
