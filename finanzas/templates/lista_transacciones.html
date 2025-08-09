@@ -82,6 +82,8 @@
                             <a href="{% url 'editar_transaccion' transaccion.id %}" class="text-indigo-600 hover:text-indigo-900">Editar</a>
                             <form action="{% url 'eliminar_transaccion' transaccion.id %}" method="post" class="inline">
                                 {% csrf_token %}
+                                <input type="hidden" name="month" value="{{ selected_month }}">
+                                <input type="hidden" name="year" value="{{ selected_year }}">
                                 <button type="submit" class="text-red-600 hover:text-red-900 ml-2">Eliminar</button>
                             </form>
                         </td>

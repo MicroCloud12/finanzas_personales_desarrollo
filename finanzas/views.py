@@ -280,9 +280,25 @@ def editar_transaccion(request, transaccion_id):
 @login_required
 def eliminar_transaccion(request, transaccion_id):
     transaccion = get_object_or_404(registro_transacciones, id=transaccion_id, propietario=request.user)
+    
     if request.method == 'POST':
+        # 1. Recuperamos el mes y el año que enviamos desde el formulario
+        month = request.POST.get('month')
+        year = request.POST.get('year')
+        
+        # 2. Eliminamos la transacción como antes
         transaccion.delete()
-        return redirect('lista_transacciones')
+        messages.success(request, "Transacción eliminada con éxito.")
+
+        # 3. Construimos la URL de redirección CON los filtros
+        redirect_url = reverse('lista_transacciones')
+        if month and year:
+            redirect_url += f'?year={year}&month={month}'
+        
+        # 4. Redirigimos a la URL con los filtros aplicados
+        return redirect(redirect_url)
+        
+    # La vista para confirmar la eliminación no cambia
     return render(request, 'confirmar_eliminar_transaccion.html', {'transaccion': transaccion})
 
 @login_required
